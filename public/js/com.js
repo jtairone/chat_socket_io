@@ -55,6 +55,7 @@ $('form').submit(function () {
     if (dados.nome && dados.mensagem) {
         renderMensagem(dados);
         socket.emit('message', dados);
+        socket.emit('digi', {'digi': false, 'nome': ''});
         form.mensagem.value = '';
     }
 });
