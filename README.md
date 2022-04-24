@@ -1,4 +1,4 @@
-##Chat em tempo real com Sockei.io 
+## Chat em tempo real com Sockei.io 
 # 
 criando um chat em tempo real usando nodejs, express, socket.io.
 

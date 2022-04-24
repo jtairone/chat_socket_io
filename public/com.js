@@ -23,6 +23,10 @@ var socket = io('http://localhost:3000')
                 document.getElementById('digi').style = 'display: none';
             }
         })
+
+        socket.on('online', data =>{
+            $('.online').html('Online: '+data);
+        })
         
         let form = document.getElementById('form');
         form.addEventListener('submit', function(e) {    
