@@ -3,17 +3,17 @@ const  app = express();
 const http = require('http');
 const server = http.createServer(app);
 const io = require('socket.io')(server);
+const router = require('./router'); 
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-    res.render('index')
-})
+app.use(router);
+
 let mensagens = [];
 
 io.on('connection', socket => {
-    //console.log('Conectado ao ID: ', socket.id);
+    console.log('Conectado ao ID: ', socket.id);
     console.log('Qt Clientes: ', socket.server.eio.clientsCount);
     setInterval(() =>{
         socket.emit('online', socket.server.eio.clientsCount)
