@@ -1,0 +1,38 @@
+##Chat em tempo real com Sockei.io 
+# 
+criando um chat em tempo real usando nodejs, express, socket.io.
+
+se abrir varias janelas do chat e preencher o campo nome ai digitar uma mensagem para os outros usuários do chat vai mostrar que aquele usuário esta digitando em tempo real.
+
+Pequeno projeto achei interesante que peguei pra estudar sockei.io e implementei esta parte de mostrar caso um usuário esteja digirando.
+
+Socket.io otima para realizar conexão entre servidor e cliente e fazer troca de informações em tempo real sem fazer refresh da pagina.
+
+sintaxe do socket.io:
+
+no servidor ( veja no arquivo server.js a estrutura )
+~~~javascript 
+const io = require('sokect.io')(sever)
+io.on('connection', socket => {
+    /* aqui esta montando no serve socket.io e aqui dentro vc envia e recebe mensagem dos client */
+    //enviando parametro e mensagem(ou objeto)
+    socket.emit('msg', 'Olá Mundo!')
+    socket.on('info', data =>{
+        console.log(data)
+    })
+})
+~~~
+no cliente (pagina com html) no final adicione o socket.io.min.js ai seu projento depois crie um script ai pode chamar a função 
+io() passando o seu servidor ai vc pode começar a trocar dados
+~~~javascript
+var socket = io('http://localhost:3000');
+
+socket.on('msg', data =>{
+    console.log(data)
+})
+socket.emit('info', {'name': 'teste', 'idade': 22})
+~~~
+
+no exemplo acima a uma troca de dados em tempo real do serve para o cliente e vice versa.
+
+#
