@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat</title>
+  <link rel="shortcut icon" href="img/tazdev.png">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<style>
+  .message {
+  /* Estilo do container da mensagem */
+  margin: 7px 0;
+  font-size: 16px;
+}
+
+.message-name {
+  /* Estilo do nome do remetente */
+  font-weight: bold;
+}
+
+.message-date {
+  /* Estilo da data e hora */
+  display: table; /* Coloca a data em uma nova linha */
+  font-size: 11px; /* Define o tamanho da fonte menor */
+  color: #000; /* Define a cor do texto da data */
+  font-family: monospace;
+  background-color: #6c757d1c;
+}
+</style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Caixa de Usuários Conectados -->
+      <div class="col-md-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="online float-left">Online: </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Usuários Online</h5>
+            <ul class="list-group list-group-flush pl-1" id="userlist">
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Caixa de Mensagens -->
+      
+      <div class="col-md-9">
+        <div class="card">
+          <div class="card-body">
+            <input type="text" class="form-control" id="username" placeholder="Digite seu nome">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body messages" id="message-box" style="height: 400px; overflow-y: auto;">
+            <!-- Aqui as mensagens serão adicionadas dinamicamente -->
+          </div>
+          <div class="card-footer">
+            <div id="digi" style="display: none">digitando...</div>
+            <div class="input-group">
+              <input type="text" class="form-control message" id="message" disabled placeholder="Digite sua mensagem...">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-primary disabled" id="btn-send">Enviar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap e scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="js/com.js"></script>
+</body>
+</html>
