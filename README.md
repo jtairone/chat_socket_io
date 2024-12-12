@@ -5,8 +5,15 @@ Criando um chat em tempo real usando nodejs, express, socket.io.
 se abrir varias janelas do chat e preencher o campo nome ai digitar uma mensagem para os outros usuários do chat vai mostrar que aquele usuário esta digitando em tempo real.
 
 Pequeno projeto achei interesante que peguei pra estudar sockei.io e implementei esta parte de mostrar caso um usuário esteja digitando.
+
+Versão 1 : http://localhost:3000/home
 #
 ![chats](https://user-images.githubusercontent.com/12955437/164973832-0f47c80a-f119-4e96-a8b9-31992ed7f8b8.png)
+
+#
+Versão 2 http://localhost:3000/index
+#
+Versão 3 e mais moderna http://localhost:3000/page
 #
 Socket.io otima para realizar conexão entre servidor e cliente e fazer troca de informações em tempo real sem fazer refresh da pagina.
 #
@@ -27,6 +34,10 @@ io.on('connection', socket => {
 #
 no cliente (pagina com html) no final adicione o socket.io.min.js ai seu projento depois crie um script ai pode chamar a função 
 io() passando o seu servidor ai vc pode começar a trocar dados
+
+#
+Atualização fiz uma rota /config aonde esta rota retorna PORT e IPLOCAL da maquina aonde o projeto esta rodando e com isso faço uma requisição e partir do retorno já preencho mp com.js o IP e PORT para o socket.oi não preciso mais ficar atualizando conforme descrito abaixo.
+#
 ~~~javascript
 var socket = io('http://localhost:3000');
 
@@ -48,3 +59,9 @@ depois somente dar start no projeto
 ~~~~javascript
 node server.js
 ~~~~
+Se tiver nodemon instalado na sua maquina pode usar assim pois tem o script para rodar usando o mesmo.
+~~~~javascript
+npm start
+~~~~
+
+

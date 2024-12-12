@@ -37,22 +37,23 @@ fetch('/config')
     
             function renderMensagem(message) {
                 let div = document.createElement('div')
-                let spanName = document.createElement('span')
-                let spanMessage = document.createElement('span')
-                let spanDate = document.createElement('span')
-    
-                div.classList.add('message')
-                spanName.classList.add('message-name')
-                spanDate.classList.add('message-date')
-                spanName.innerHTML = `${message.nome}: `
+                let strong = document.createElement('strong')
+                let p = document.createElement('p')
+                let small = document.createElement('small')
                 
-                spanName.textContent = `${message.nome}: `
-                spanMessage.textContent = `${message.mensagem}`
-                spanDate.textContent = `${message.dthora}`
+                div.classList.add('bg-light')
+                div.classList.add('rounded')
+                div.classList.add('p-3')
+                p.classList.add('mb-0')
+                small.classList.add('text=muted')
+                
+                strong.textContent = `${message.nome}: `
+                p.textContent = `${message.mensagem}`
+                small.textContent = `${message.dthora}`
     
-                div.appendChild(spanName);
-                div.appendChild(spanMessage);
-                div.appendChild(spanDate)
+                div.appendChild(strong);
+                div.appendChild(p);
+                div.appendChild(small)
                 document.querySelector('.messages').appendChild(div);
             }
     
@@ -66,12 +67,18 @@ fetch('/config')
                 renderMensagem(msg);
             })
     
+            let isTyping = false
             socket.on('digitando', data => {
-                if (data.digi) {
-                    document.getElementById('digi').innerHTML = `${data.nome} digitando...`
+                let span = document.createElement('span')
+                if (data.digi && !isTyping) {
+                    isTyping = true
+                    span.classList.add('dots')
+                    document.getElementById('digi').textContent = `${data.nome} digitando`
+                    document.getElementById('digi').appendChild(span)
                     document.getElementById('digi').style = 'display: true';
-                } else {
-                    document.getElementById('digi').innerHTML = '';
+                } else if (!data.digi && isTyping) {
+                    isTyping = false
+                    document.getElementById('digi').textContent = '';
                     document.getElementById('digi').style = 'display: none';
                 }
             })
@@ -84,7 +91,11 @@ fetch('/config')
                 data.users.map(user =>{
                         let li = document.createElement('li')
                         li.classList.add('list-group-item')
-                        li.innerHTML = `<span style="color: #2F9E39;">${user}</span>`
+                        li.classList.add('d-flex')
+                        li.classList.add('align-itens-center')
+                        //li.innerHTML = `<span style="color: #2F9E39;">${user}</span>`
+                        li.innerHTML = `<span>${user}</span><span class="ms-auto badge bg-success">Online</span>`
+                        //li.innerHTML = `<span class="ms-auto badge bg-success">Online</span>`
                         ul.appendChild(li)
                 }) 
             })

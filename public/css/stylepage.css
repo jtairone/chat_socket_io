@@ -1,0 +1,88 @@
+.card {
+  border: none;
+  border-radius: 15px;
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+}
+
+.list-group-item {
+  border-left: none;
+  border-right: none;
+  padding: 1rem;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.form-control {
+  border-radius: 25px;
+  padding: 0.75rem 1.25rem;
+}
+
+.btn {
+  border-radius: 25px;
+}
+
+.badge {
+  padding: 0.5em 1em;
+  border-radius: 25px;
+}
+
+.rounded {
+  border-radius: 15px !important;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+/* Estilo para o digitando ficar os ... piscando*/
+ /* Estilo da Div */
+.typing {
+  font-size: 14px;
+  font-family: Arial, sans-serif;
+  display: inline-block;
+  font-style: italic;
+}
+
+/* Animação dos "..." */
+.dots::after {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: dotsAnimation 1.5s steps(3, end) infinite;
+}
+
+/* Keyframes da animação */
+@keyframes dotsAnimation {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Mensagens</title>
+    <link rel="shortcut icon" href="img/tazdev.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stylepage.css">
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+</head>
+<body class="bg-light">
+    <header class="bg-white shadow-sm py-3 mb-4">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <img src="img/tazdev.png" alt="Logo" class="rounded-circle me-3" width="50">
+                <h1 class="h4 mb-0">Portal de Mensagens</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="h6 mb-0">Online Users</h2>
+                    </div>
+                    <ul class="list-group list-group-flush" id="userlist">
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card-footer bg-white">
+                        <input type="text" class="form-control" placeholder="Qual seu nome?" id="username" aria-label="Message input">
+                </div>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body messages" id="message-box" style="height: 400px; overflow-y: auto;">
+                        
+                    </div>
+                    <div class="card-footer bg-white">
+                        <div id="digi" style="display: none" class="typing"></div>
+                    </div>
+                    <div class="card-footer bg-white d-flex">
+                            <input type="text" class="form-control message" id="message" disabled placeholder="digite sua mensagem..." aria-label="Message input">
+                            <button type="button" class="btn btn-primary px-4 disabled" id="btn-send">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/comio.js"></script>
+</body>
+</html>

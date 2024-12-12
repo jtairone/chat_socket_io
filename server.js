@@ -1,11 +1,12 @@
 const express = require('express')
 const  app = express()
 const https = require('https')
+const http = require('http')
 const cors = require('cors')
 const fs = require('fs')
-const server = https.createServer({
-    key: fs.readFileSync('./src/cert/certprivate.key'),
-    cert: fs.readFileSync('./src/cert/publica.crt')
+const server = http.createServer({
+    //key: fs.readFileSync('./src/cert/certprivate.key'),
+   // cert: fs.readFileSync('./src/cert/publica.crt')
 }, app)
 const io = require('socket.io')(server)
 const router = require('./router') 
@@ -71,10 +72,10 @@ io.on('connection', socket => {
         mensagens.push(dados)
         //envia mensagem para todos conectados
         socket.broadcast.emit('mensagemRecebida', dados);
-   })
-   socket.on('digi', data => {
-         socket.broadcast.emit('digitando', data);
-   })
+    })
+    socket.on('digi', data => {
+        socket.broadcast.emit('digitando', data);
+    })
 })
 
 server.listen(process.env.PORT, () => {
