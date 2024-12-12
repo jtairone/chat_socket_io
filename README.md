@@ -13,8 +13,12 @@ Versão 1 : http://localhost:3000/home
 #
 Versão 2 http://localhost:3000/index
 #
+![image](https://github.com/user-attachments/assets/0f66db12-1e51-4e5e-8d7e-aa6a4898eff8)
+
 Versão 3 e mais moderna http://localhost:3000/page
 #
+![image](https://github.com/user-attachments/assets/5af738e7-a516-438a-9e0e-56e6b36cf94d)
+
 Socket.io otima para realizar conexão entre servidor e cliente e fazer troca de informações em tempo real sem fazer refresh da pagina.
 #
 **Sintaxe** do socket.io:
