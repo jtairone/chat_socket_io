@@ -4,6 +4,7 @@ const https = require('https')
 const http = require('http')
 const cors = require('cors')
 const fs = require('fs')
+const funcoes = require('./src/funcoes')
 const server = http.createServer({
     //key: fs.readFileSync('./src/cert/certprivate.key'),
    // cert: fs.readFileSync('./src/cert/publica.crt')
@@ -27,29 +28,23 @@ app.use(router)
 
 let mensagens = []
 let users = []
-
-//valida jwt na requisições para poder conectar o socket.io
-/* io.use((socket, next) => {
-    if (socket.handshake.query && socket.handshake.query.token){
-        jwt.verify(socket.handshake.query.token, '123', function(err, decoded) {
-            if (err) return next(new Error('Autenticação falhou'));
-            socket.decoded = decoded;
-            next();
-        });
-    } else {
-        next(new Error('Autenticação falhou'));
-    }    
-}) */
-
+let idContacts = []
 
 io.on('connection', socket => {
     //console.log('Conectado ao ID: ', socket.id)
     console.log('Qt Clientes: ', socket.server.eio.clientsCount)
-    // console.log('Clientes: ', socket.server.eio.clients)
+    //console.log('Clientes: ', socket.server.eio)
     //console.log(socket.handshake.query)
     //const nomeUsuario = socket.handshake.query;
     //console.log(`Usuário conectado: ${nomeUsuario}`)
+    //console.log(socket.handshake.query)
     const nomeUsuario = socket.handshake.query.nomeUsuario
+    const idContact = socket.handshake.query.t
+    if(!idContacts.some(contact => contact.id === socket.handshake.query.t)){
+        idContacts.push({
+            id: socket.handshake.query.t,
+            nomeUsuario: socket.handshake.query.nomeUsuario})
+    }
     if(!users.includes(nomeUsuario)){
         users.push(nomeUsuario)
        // console.log('Usuário desconectado:', nomeUsuario);
@@ -57,16 +52,22 @@ io.on('connection', socket => {
     }
     // Evento para lidar com desconexões e apagar da lista
     socket.on('disconnect', () => {
-        const index = users.indexOf(nomeUsuario);
+        const index = users.indexOf(nomeUsuario)
+        const idIndex = idContacts.findIndex(contact => contact.id === idContact)
         if (index !== -1) {
-            users.splice(index, 1);
-            //console.log('Usuário desconectado:', nomeUsuario);
-            //console.log('Lista de usuários conectados:', users);
+            users.splice(index, 1)
+            //console.log('Usuário desconectado:', nomeUsuario)
+            //console.log('Lista de usuários conectados:', users)
+            //console.log('Lista de IDContacts conectados:', idContacts)
         }
-    });
+        if (idIndex !== -1) {
+            idContacts.splice(idIndex, 1); // Remove o objeto com o ID do array
+        }
+    })
+
     setInterval(() =>{
-        socket.emit('online', {qt: socket.server.eio.clientsCount, 'users': users })
-    }, 1000)
+        socket.emit('online', {qt: socket.server.eio.clientsCount, 'users': users, 'idContacts': idContacts})
+    }, 2000)
     socket.emit('previusMensagens', mensagens)
     socket.on('message', dados => {
         mensagens.push(dados)
@@ -79,5 +80,5 @@ io.on('connection', socket => {
 })
 
 server.listen(process.env.PORT, () => {
-    console.log(`server rodando na porta: ${process.env.PORT}`);
+    console.log(`server rodando na porta: ${process.env.PORT}\nRodar Aplicação em : http://${funcoes.getLocalIP()}:${process.env.PORT}/page`);
 })

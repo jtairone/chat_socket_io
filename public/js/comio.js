@@ -51,10 +51,11 @@ fetch('/config')
                 p.textContent = `${message.mensagem}`
                 small.textContent = `${message.dthora}`
     
-                div.appendChild(strong);
-                div.appendChild(p);
+                div.appendChild(strong)
+                div.appendChild(p)
                 div.appendChild(small)
-                document.querySelector('.messages').appendChild(div);
+                document.querySelector('.messages').appendChild(div)
+                document.querySelector('.messages').scrollTop = document.querySelector('.messages').scrollHeight
             }
     
             socket.on('previusMensagens', messages => {
@@ -84,7 +85,7 @@ fetch('/config')
             })
     
             socket.on('online', data => {
-                $('.online').html('Online: ' + data.qt)
+                $('.online').html( data.qt)
                 let ul = document.querySelector('#userlist')
                 let listaItens = ul.querySelectorAll('li')
                 ul.innerHTML = ''
